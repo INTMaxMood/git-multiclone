@@ -28,6 +28,7 @@ Provides the following options:
         --debug                     displays information on the screen (debug mode)
     -c, --check                     check available repositories (report)
     -g, --get <all|repo_name>       get all or specific repositories
+    -u, --user <username>           set github username
 ``````
 
 ## Configuration file

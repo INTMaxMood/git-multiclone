@@ -96,8 +96,8 @@ function __main__() {
 
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
-  local _short_opt="cg:"
-  local _long_opt="help,debug,check,get:"
+  local _short_opt="cg:u:"
+  local _long_opt="help,debug,check,get:user:"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -147,6 +147,14 @@ function __main__() {
 
         shift 2 ;;
 
+      -u|--user)
+
+        export check_user="1"
+
+        export _username="$2"
+
+        shift 2 ;;
+
       *)
 
         if [[ "$2" == "-" ]] || [[ ! -z "$2" ]] ; then
@@ -193,7 +201,7 @@ function __main__() {
   # or selected parameters without which the script can not work properly
   # have been used. Do not add the load_state variable to the _opt_values array,
   # which is supported above.
-  _opt_values=()
+  _opt_values=("check_user" "_username")
 
   # Checking the value of the variables (if they are unset or empty):
   #   - variables for call parameters

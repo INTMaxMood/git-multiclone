@@ -571,6 +571,7 @@ function _help_() {
         --debug                     displays information on the screen (debug mode)
     -c, --check                     check available repositories (report)
     -g, --get <all|repo_name>       get all or specific repositories
+    -u, --user <username>           set github username
 
 
   This program comes with ABSOLUTELY NO WARRANTY.
