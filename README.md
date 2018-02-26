@@ -27,7 +27,7 @@ Provides the following options:
         --help                      show this message
         --debug                     displays information on the screen (debug mode)
     -c, --check                     check available repositories (report)
-    -g, --get                       get all or specific repositories
+    -g, --get <all|repo_name>       get all or specific repositories
 ``````
 
 ## Configuration file
