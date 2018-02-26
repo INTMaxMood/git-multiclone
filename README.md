@@ -10,7 +10,7 @@
 
 ## Description
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
+Download the repositories that you have marked with an star from github.
 
 ## Parameters
 
@@ -26,9 +26,8 @@ Provides the following options:
   Options:
         --help                      show this message
         --debug                     displays information on the screen (debug mode)
-        --verbose                   displays 'info' messages on the screen (verbose mode)
-        --time                      displays execution time, occurs only with --verbose
-    -c, --config <file>             attach an external config file to the script
+    -c, --check                     check available repositories (report)
+    -g, --get                       get all or specific repositories
 ``````
 
 ## Configuration file

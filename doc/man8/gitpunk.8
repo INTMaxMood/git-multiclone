@@ -2,11 +2,11 @@
 .\" Contact contact@nslab.at.
 .TH man 8 "26.02.2018" "1.0.0" "gitpunk man page"
 .SH NAME
-gitpunk \- short script description
+gitpunk \- download the repositories that you have marked with an star from github.
 .SH SYNOPSIS
 gitpunk <option|long-option>
 .SH DESCRIPTION
-gitpunk short long description.
+Download the repositories that you have marked with an star from github.
 .SH OPTIONS
 --help
         show this message
@@ -14,14 +14,11 @@ gitpunk short long description.
 --debug
         displays information on the screen (debug mode)
 
---verbose
-        displays 'info' messages on the screen (verbose mode)
+-c, --check
+        check available repositories (report)
 
---time
-        displays execution time, occurs only with --verbose
-
--c, --config <file>
-        attach an external config file to the script
+-g, --get
+        get all or specific repositories
 .SH SEE ALSO
 https://github.com/trimstray/gitpunk
 .SH BUGS
