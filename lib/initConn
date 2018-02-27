@@ -24,10 +24,10 @@ function initConn() {
   for i in $(seq 1 "$pages") ; do
 
     _msg_args+=(\
-    "test message")
+    "test message: $i")
 
     _cmd_args+=(\
-    "curl --proxy socks5h://localhost:9001 -ks \"https://api.github.com/users/${username}/starred?per_page=100&page=${i}\" >> ${_output_tmp}")
+    "curl --proxy socks5h://localhost:9003 -ks https://api.github.com/users/${username}/starred?per_page=100&page=${i}")
 
   done
 
