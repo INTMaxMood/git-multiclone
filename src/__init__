@@ -31,7 +31,7 @@ function __main__() {
 
   # Declaration of output variables (--debug and --verbose params).
   stdout_mode=""
-  printf_mode="verbose"
+  printf_mode=""
   # Enable/disable output colors.
   # shellcheck disable=SC2034
   s_color="true"
