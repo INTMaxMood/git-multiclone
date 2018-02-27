@@ -246,7 +246,7 @@ function __main__() {
 
     if [[ "$printf_mode" != "verbose" ]] ; then
 
-      _sprintf "stop" "missing argument: '--time' is dependent on '--verbose'"
+      _sprintf "stop" "missing argument: '--time' occurs only with '--verbose'"
 
       _logger "stop" \
         "${_FUNCTION_ID}()" \
