@@ -31,7 +31,7 @@ function __main__() {
 
   # Declaration of output variables (--debug and --verbose params).
   stdout_mode=""
-  printf_mode=""
+  printf_mode="verbose"
   # Enable/disable output colors.
   # shellcheck disable=SC2034
   s_color="true"
@@ -240,10 +240,6 @@ function __main__() {
 
   fi
 
-  pagesCounter "$_pages"
-
-  initConn "$_username" "$_max_per_pages"
-
   # Only if you used --time, --verbose and --debug script parameters
   # - checking the relationship between call parameters.
   if [[ "$time_mode" -eq 1 ]] ; then
@@ -271,6 +267,10 @@ function __main__() {
     fi
 
   fi
+
+  pagesCounter "$_pages"
+
+  initConn "$_username" "$_max_per_pages"
 
   # ````````````````````````````````````````````````````````````````````````````
 
