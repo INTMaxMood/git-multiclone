@@ -270,6 +270,8 @@ function __main__() {
 
   _init_function "pagesCounter $_pages"
 
+  _sprintf "head" "Dump for '$_username'"
+
   _init_function "initConn $_username $_max_per_pages"
 
   # ````````````````````````````````````````````````````````````````````````````

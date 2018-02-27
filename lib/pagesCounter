@@ -23,6 +23,7 @@ function pagesCounter() {
   _max_per_pages=0
 
   _max_pages=$((pages * 30))
+
   _max_per_pages=$((_max_pages / 100 + 1))
 
   return "$_STATE"
