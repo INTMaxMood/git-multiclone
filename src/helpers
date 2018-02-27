@@ -569,9 +569,9 @@ function _help_() {
   Options:
         --help                      show this message
         --debug                     displays information on the screen (debug mode)
-    -c, --check                     check available repositories (report)
-    -g, --get <all|repo_name>       get all or specific repositories
     -u, --user <username>           set github username
+    -p, --pages <num_value>         set github stars pages
+    -g, --get <all|repo_name>       get all or specific repositories
 
 
   This program comes with ABSOLUTELY NO WARRANTY.
@@ -612,7 +612,9 @@ function _before_init() {
     "${_FUNCTION_ID}()" \
     "directory change error: '$_rel'"
 
-  : >"$_log_stdout"
+  for i in "$_log_output" ; do
+    : >"$i"
+  done
 
   return "$_STATE"
 
@@ -642,6 +644,10 @@ function _after_init() {
   _logger "stop" \
     "${_FUNCTION_ID}()" \
     "directory change error: '$_rel'"
+
+  for i in "$_output_tmp" ; do
+    : >"$i"
+  done
 
   return "$_STATE"
 

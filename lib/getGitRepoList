@@ -1,0 +1,25 @@
+# shellcheck shell=bash
+
+# ``````````````````````````````````````````````````````````````````````````````
+# Function name: getGitRepoList()
+#
+# Description:
+#   Download github user repository list.
+#
+# Usage:
+#   getGitRepoList
+#
+# Examples:
+#   getGitRepoList
+#
+
+function getGitRepoList() {
+
+  local _FUNCTION_ID="getGitRepoList"
+  local _STATE="0"
+
+  
+
+  return "$_STATE"
+
+}

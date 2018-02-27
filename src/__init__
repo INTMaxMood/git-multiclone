@@ -41,6 +41,12 @@ function __main__() {
   time_mode="0"
   export _cmdtime_state="0"
 
+  # Temporary output file.
+  readonly _output_tmp="${_tmp}/output"
+
+  # Local directory for repositories.
+  readonly _repo_directory="${_rel}/repo"
+
   # We place here used commands at script runtime, as strings to anything
   # unnecessarily run.
   readonly commands=("basename" "dirname" "stat" "date" "grep" "egrep" "cut" \
@@ -96,8 +102,8 @@ function __main__() {
 
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
-  local _short_opt="cg:u:"
-  local _long_opt="help,debug,check,get:user:"
+  local _short_opt="cu:p:g"
+  local _long_opt="help,debug,user:,pages:,get"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -133,25 +139,27 @@ function __main__() {
 
         shift ;;
 
-      -c|--check)
+      -u|--user)
 
-        export check_state="1"
+        export user_state="1"
+
+        export _username="$2"
+
+        shift 2 ;;
+
+      -p|--pages)
+
+        export pages_state="1"
+
+        export _pages="$2"
 
         shift 2 ;;
 
       -g|--get)
 
-        export check_get="1"
+        export get_state="1"
 
         export _get_list="$2"
-
-        shift 2 ;;
-
-      -u|--user)
-
-        export check_user="1"
-
-        export _username="$2"
 
         shift 2 ;;
 
@@ -189,6 +197,8 @@ function __main__() {
   # Put here all your variable declarations, function calls
   # and all the other code blocks.
 
+  local _max_per_pages=0
+
   # In this section we add external file (for -c|--config script param).
   if [[ "$load_state" -eq 1 ]] ; then _load "head" "$config" ; fi
 
@@ -201,7 +211,7 @@ function __main__() {
   # or selected parameters without which the script can not work properly
   # have been used. Do not add the load_state variable to the _opt_values array,
   # which is supported above.
-  _opt_values=("check_user" "_username")
+  _opt_values=("user_state" "_username" "pages_state" "_pages")
 
   # Checking the value of the variables (if they are unset or empty):
   #   - variables for call parameters
@@ -229,6 +239,10 @@ function __main__() {
     done
 
   fi
+
+  pagesCounter "$_pages"
+
+  initConn "$_username" "$_max_per_pages"
 
   # Only if you used --time, --verbose and --debug script parameters
   # - checking the relationship between call parameters.

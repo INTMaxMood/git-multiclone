@@ -1,0 +1,33 @@
+# shellcheck shell=bash
+
+# ``````````````````````````````````````````````````````````````````````````````
+# Function name: initConn()
+#
+# Description:
+#   Initialize connection to github.
+#
+# Usage:
+#   initConn
+#
+# Examples:
+#   initConn
+#
+
+function initConn() {
+
+  local _FUNCTION_ID="initConn"
+  local _STATE="0"
+
+  local username="$1"
+  local pages="$2"
+
+  for i in $(seq 1 "$pages") ; do
+
+    curl --proxy socks5h://localhost:9001 \
+         -ks "https://api.github.com/users/${username}/starred?per_page=100&page=${i}" >> ${_output_tmp}
+
+  done
+
+  return "$_STATE"
+
+}
