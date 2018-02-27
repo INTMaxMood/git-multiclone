@@ -268,9 +268,9 @@ function __main__() {
 
   fi
 
-  pagesCounter "$_pages"
+  _init_function "pagesCounter $_pages"
 
-  initConn "$_username" "$_max_per_pages"
+  _init_function "initConn $_username $_max_per_pages"
 
   # ````````````````````````````````````````````````````````````````````````````
 

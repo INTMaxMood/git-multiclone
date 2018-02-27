@@ -23,8 +23,11 @@ function initConn() {
 
   for i in $(seq 1 "$pages") ; do
 
-    curl --proxy socks5h://localhost:9001 \
-         -ks "https://api.github.com/users/${username}/starred?per_page=100&page=${i}" >> ${_output_tmp}
+    _msg_args+=(\
+    "test message")
+
+    _cmd_args+=(\
+    "curl --proxy socks5h://localhost:9001 -ks \"https://api.github.com/users/${username}/starred?per_page=100&page=${i}\" >> ${_output_tmp}")
 
   done
 
