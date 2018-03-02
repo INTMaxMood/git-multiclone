@@ -271,8 +271,11 @@ function __main__() {
   _init_function "pagesCounter $_pages"
 
   _sprintf "head" "Wait a moment, I'm working..."
-    _init_function "initConn $_username $_max_per_pages"
+
+    _init_function "initConn $_username $_max_per_pages $_tor_port"
+
     _init_function "getGitRepoList"
+
     _init_function "getGitRepo"
 
   # ````````````````````````````````````````````````````````````````````````````
