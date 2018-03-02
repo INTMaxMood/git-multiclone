@@ -18,7 +18,11 @@ function getGitRepo() {
   local _FUNCTION_ID="getGitRepo"
   local _STATE="0"
 
-  
+  for i in $(cat ${_output_tmp}) ; do
+
+    echo $i
+
+  done
 
   return "$_STATE"
 
