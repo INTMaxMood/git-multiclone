@@ -645,10 +645,6 @@ function _after_init() {
     "${_FUNCTION_ID}()" \
     "directory change error: '$_rel'"
 
-  for i in "$_output_tmp" ; do
-    : >"$i"
-  done
-
   return "$_STATE"
 
 }
