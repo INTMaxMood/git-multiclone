@@ -19,7 +19,7 @@ function getGitRepoList() {
   local _STATE="0"
 
   _msg_args+=(\
-  "Get repo list: $i")
+  "-> prepare repository list")
 
   _cmd_args+=(\
   "eval cat $_log_stdout | grep clone_url | cut -d ':' -f2- | tr -d '\"' | tr -d ',' > ${_output_tmp}")
