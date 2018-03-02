@@ -20,14 +20,26 @@ function initConn() {
 
   local username="$1"
   local pages="$2"
+  local tor="$3"
+
+
+  if [[ "$tor_state" -eq 1 ]] ; then
+
+    _conn_args="--proxy socks5h://localhost:${tor}"
+
+  else
+
+    _conn_args=""
+
+  fi
 
   for i in $(seq 1 "$pages") ; do
 
     _msg_args+=(\
-    "Page: $i")
+    "-> searching repository")
 
     _cmd_args+=(\
-    "curl --proxy socks5h://localhost:9003 -ks https://api.github.com/users/${username}/starred?per_page=100&page=${i}")
+    "curl ${_conn_args} -ks https://api.github.com/users/${username}/starred?per_page=100&page=${i}")
 
   done
 
