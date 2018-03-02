@@ -28,7 +28,7 @@ Provides the following options:
         --debug                     displays information on the screen (debug mode)
     -u, --user <username>           set github username
     -p, --pages <num_value>         set github stars pages
-    -g, --get <all|repo_name>       get all or specific repositories
+        --tor <port_number>         set the tor port number
 ``````
 
 ## Configuration file
