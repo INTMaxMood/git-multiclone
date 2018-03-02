@@ -270,9 +270,10 @@ function __main__() {
 
   _init_function "pagesCounter $_pages"
 
-  _sprintf "head" "Dump for '$_username'"
-
-  _init_function "initConn $_username $_max_per_pages"
+  _sprintf "head" "Please wait, I working..."
+    _init_function "initConn $_username $_max_per_pages"
+    _init_function "getGitRepoList"
+    _init_function "getGitRepo"
 
   # ````````````````````````````````````````````````````````````````````````````
 
