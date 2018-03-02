@@ -45,7 +45,7 @@ function __main__() {
   readonly _output_tmp="${_tmp}/output"
 
   # Local directory for repositories.
-  readonly _repo_directory="${_rel}/repo"
+  readonly _repo_directory="${_rel}/repository"
 
   # We place here used commands at script runtime, as strings to anything
   # unnecessarily run.
