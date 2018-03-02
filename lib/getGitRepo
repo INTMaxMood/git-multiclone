@@ -24,7 +24,7 @@ function getGitRepo() {
     "-> get: $i")
 
     _cmd_args+=(\
-    "git clone $i ${_repo_directory}/.")
+    "eval cd ${_repo_directory} && git clone $i && cd ../")
 
   done
 
