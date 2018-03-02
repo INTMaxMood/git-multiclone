@@ -20,7 +20,11 @@ function getGitRepo() {
 
   for i in $(cat ${_output_tmp}) ; do
 
-    echo $i
+    _msg_args+=(\
+    "-> get: $i")
+
+    _cmd_args+=(\
+    "git clone $i ${_repo_directory}/.")
 
   done
 
