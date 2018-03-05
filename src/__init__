@@ -50,6 +50,9 @@ function __main__() {
   # Local directory for repositories.
   readonly _repo_directory="${_rel}/repository"
 
+  # Connection arguments.
+  export _conn_args=""
+
   # We place here used commands at script runtime, as strings to anything
   # unnecessarily run.
   readonly commands=("basename" "dirname" "stat" "date" "grep" "egrep" "cut" \
@@ -255,10 +258,20 @@ function __main__() {
 
   fi
 
+  if [[ "$tor_state" -eq 1 ]] ; then
+
+    _conn_args="--proxy socks5h://localhost:${_tor_port}"
+
+  else
+
+    _conn_args=""
+
+  fi
+
   _username=$(dialog --clear --inputbox "Enter the username:" 8 50 3>&1 1>&2 2>&3)
 
-  state=$?
-  if [[ "$state" -ne 0 ]] ; then
+  _kstate=$?
+  if [[ $_kstate -ne 0 ]] ; then
 
     _sprintf "stop" "empty username"
 
@@ -270,8 +283,8 @@ function __main__() {
 
   _pages=$(dialog --clear --inputbox "Enter the pages:" 8 50 3>&1 1>&2 2>&3)
 
-  state=$?
-  if [[ "$state" -ne 0 ]] ; then
+  _kstate=$?
+  if [[ $_kstate -ne 0 ]] ; then
 
     _sprintf "stop" "empty pages"
 
@@ -283,11 +296,13 @@ function __main__() {
 
   clear
 
-  _init_function "genCounter $_pages"
+  _sprintf "head" "Background tasks..."
 
-  _sprintf "head" "Wait a moment, I'm working..."
+  _init_function "genPagesNum $_pages"
 
-  _init_function "initConn $_username $_max_per_pages $_tor_port"
+  _init_function "checkUser $_username"
+
+  _init_function "getRepoList $_username $_max_per_pages"
 
   _init_function "genRepoList"
 
@@ -319,8 +334,8 @@ function __main__() {
 
   _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
-  state=$?
-  if [[ "$state" -ne 0 ]] ; then _exit_ 0 ; fi
+  _kstate=$?
+  if [[ $_kstate -ne 0 ]] ; then _exit_ 0 ; fi
 
   dialog --gauge "Clone" 6 100 0 < <(
 
@@ -342,6 +357,8 @@ __EOF__
 
   done
 )
+
+  dialog --msgbox "Done! Your repositories are in repositories/ directory." 5 65
 
   # ````````````````````````````````````````````````````````````````````````````
 
