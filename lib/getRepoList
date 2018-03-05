@@ -7,10 +7,10 @@
 #   Get repository list.
 #
 # Usage:
-#   getRepoList "username" "pages"
+#   getRepoList "username" "pages" "repo_type"
 #
 # Examples:
-#   getRepoList "$username" "$pages"
+#   getRepoList "$username" "$pages" "$type"
 #
 
 function getRepoList() {
