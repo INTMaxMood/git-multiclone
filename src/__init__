@@ -335,14 +335,14 @@ function __main__() {
 
   for r in "${_repo_list[@]}" ; do
 
-    PCT=$(( 100*(++j)/n ))
+    _pg=$(( 100*(++j)/n ))
 
-cat <<EOF
+cat << __EOF__
 XXX
-$PCT
+$_pg
 Cloning repository: $r
 XXX
-EOF
+__EOF__
 
     cd ${_repo_directory} && git clone "$r" >/dev/null 2>&1 && cd ../
 
