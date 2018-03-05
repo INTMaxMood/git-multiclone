@@ -21,7 +21,7 @@ function getGitRepo() {
   for i in $(cat ${_output_tmp}) ; do
 
     _msg_args+=(\
-    "-> get: $i")
+    "-> clone: $i")
 
     _cmd_args+=(\
     "eval cd ${_repo_directory} && git clone $i && cd ../")

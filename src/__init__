@@ -283,11 +283,17 @@ function __main__() {
 
   _init_function "getGitRepoList"
 
+  local _repo_num=$(cat ${_output_tmp} | wc -l)
+
+  _sprintf "info" "-> found $_repo_num repositories"
+
   if [[ "$show_state" -eq 1 ]] ; then
 
     less "${_output_tmp}"
 
   else
+
+    _sprintf "head" "OK, I'm cloning $_repo_num found repositories, it may take a long time..."
 
     _init_function "getGitRepo"
 
