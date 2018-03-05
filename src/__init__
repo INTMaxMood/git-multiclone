@@ -257,8 +257,8 @@ function __main__() {
 
   _username=$(dialog --clear --inputbox "Enter the username:" 8 50 3>&1 1>&2 2>&3)
 
-  exitstatus=$?
-  if [[ "$exitstatus" -ne 0 ]] ; then
+  state=$?
+  if [[ "$state" -ne 0 ]] ; then
 
     _sprintf "stop" "wrong username!"
 
@@ -270,8 +270,8 @@ function __main__() {
 
   _pages=$(dialog --clear --inputbox "Enter the pages:" 8 50 3>&1 1>&2 2>&3)
 
-  exitstatus=$?
-  if [[ "$exitstatus" -ne 0 ]] ; then
+  state=$?
+  if [[ "$state" -ne 0 ]] ; then
 
     _sprintf "stop" "wrong pages!"
 
@@ -319,8 +319,8 @@ function __main__() {
 
   _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
-  exitstatus=$?
-  if [[ "$exitstatus" -ne 0 ]] ; then _exit_ 0 ; fi
+  state=$?
+  if [[ "$state" -ne 0 ]] ; then _exit_ 0 ; fi
 
   dialog --gauge "Clone" 6 100 0 < <(
 

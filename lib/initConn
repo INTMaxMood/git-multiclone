@@ -33,6 +33,26 @@ function initConn() {
 
   fi
 
+  _sprintf "info" "-> checking username"
+
+  _user_status=$(\
+  curl ${_conn_args} -Iks https://api.github.com/users/${username} \
+  | grep "Status" \
+  | cut -d ":" -f2 \
+  | grep "200")
+
+  state="$?"
+
+  if [[ "$state" -ne 0 ]] ; then
+
+    _sprintf "stop" "sorry, not found this username"
+
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "sorry, not found this username"
+
+  fi
+
   for i in $(seq 1 "$pages") ; do
 
     _msg_args+=(\

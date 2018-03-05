@@ -4,7 +4,7 @@
 # Function name: getGitRepoList()
 #
 # Description:
-#   Download github user repository list.
+#   Prepare repository list.
 #
 # Usage:
 #   getGitRepoList

@@ -20,6 +20,7 @@ function pagesCounter() {
 
   local pages="$1"
   local _max_pages=0
+
   _max_per_pages=0
 
   _max_pages=$((pages * 30))
