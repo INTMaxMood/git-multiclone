@@ -1,21 +1,21 @@
 # shellcheck shell=bash
 
 # ``````````````````````````````````````````````````````````````````````````````
-# Function name: pagesCounter()
+# Function name: genCounter()
 #
 # Description:
 #   Pages counter.
 #
 # Usage:
-#   pagesCounter
+#   genCounter
 #
 # Examples:
-#   pagesCounter
+#   genCounter
 #
 
-function pagesCounter() {
+function genCounter() {
 
-  local _FUNCTION_ID="pagesCounter"
+  local _FUNCTION_ID="genCounter"
   local _STATE="0"
 
   local pages="$1"
