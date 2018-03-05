@@ -301,7 +301,16 @@ function __main__() {
 
   _sprintf "info" "-> found $_repo_num repositories"
 
-  awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
+  if [[ "$select_state" -eq 0 ]] ; then
+
+    awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
+
+  else
+
+    awk '{print $0" \"\" on"}' "${_output_tmp}" > "${_output_tmp}.num"
+
+  fi
+
   mv "${_output_tmp}.num" "${_output_tmp}"
 
   rm -fr "${_output_tmp}.num"
@@ -316,20 +325,17 @@ function __main__() {
 
   _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
-  if [[ "${_repo_list[0]}" == "All" ]] ; then
+  exitstatus=$?
+  if [[ "$exitstatus" -ne 0 ]] ; then _exit_ 0 ; fi
 
-    true
+  dialog --gauge "Clone" 6 100 0 < <(
 
-  else
+  n="${#_repo_list[@]}"
+  j=0
 
-    dialog --gauge "Clone" 6 100 0 < <(
+  for r in "${_repo_list[@]}" ; do
 
-    n="${#_repo_list[@]}"
-    j=0
-
-    for r in "${_repo_list[@]}" ; do
-
-      PCT=$(( 100*(++j)/n ))
+    PCT=$(( 100*(++j)/n ))
 
 cat <<EOF
 XXX
@@ -338,22 +344,10 @@ Cloning repository: $r
 XXX
 EOF
 
-      cd ${_repo_directory} && git clone "$r" >/dev/null 2>&1 && cd ../
+    cd ${_repo_directory} && git clone "$r" >/dev/null 2>&1 && cd ../
 
-    done
+  done
 )
-
-      #for j in $(cat ${_output_tmp}) ; do
-
-      #  cd ${_repo_directory} && git clone "$j" && cd ../
-
-      #done
-
-      # _init_function "getGitRepo"
-
-    # done
-
-  fi
 
   # ````````````````````````````````````````````````````````````````````````````
 
