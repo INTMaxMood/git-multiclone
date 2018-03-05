@@ -105,8 +105,8 @@ function __main__() {
 
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
-  local _short_opt="cu:p:"
-  local _long_opt="help,debug,user:,pages:,tor:,show"
+  local _short_opt=""
+  local _long_opt="help,debug,tor:"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -142,22 +142,6 @@ function __main__() {
 
         shift ;;
 
-      -u|--user)
-
-        export user_state="1"
-
-        export _username="$2"
-
-        shift 2 ;;
-
-      -p|--pages)
-
-        export pages_state="1"
-
-        export _pages="$2"
-
-        shift 2 ;;
-
       --tor)
 
         export tor_state="1"
@@ -165,12 +149,6 @@ function __main__() {
         export _tor_port="$2"
 
         shift 2 ;;
-
-      --show)
-
-        export show_state="1"
-
-        shift ;;
 
       *)
 

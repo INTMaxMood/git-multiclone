@@ -26,10 +26,7 @@ Provides the following options:
   Options:
         --help                      show this message
         --debug                     displays information on the screen (debug mode)
-    -u, --user <username>           set github username
-    -p, --pages <num_value>         set github stars pages
         --tor <port_number>         set the tor port number
-        --show                      only show available repositories
 ``````
 
 ## Configuration file

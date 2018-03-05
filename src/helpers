@@ -569,10 +569,7 @@ function _help_() {
   Options:
         --help                      show this message
         --debug                     displays information on the screen (debug mode)
-    -u, --user <username>           set github username
-    -p, --pages <num_value>         set github stars pages
         --tor <port_number>         set the tor port number
-        --show                      only show available repositories
 
 
   This program comes with ABSOLUTELY NO WARRANTY.
