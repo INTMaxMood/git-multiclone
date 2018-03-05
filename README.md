@@ -12,7 +12,7 @@
 
 Download user repositories from github with simple bash script! This tool also allow get repo that you have marked with an star from github.
 
-
+[![asciicast](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH.png)](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH)
 
 ## Parameters
 
