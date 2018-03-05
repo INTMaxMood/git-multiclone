@@ -103,7 +103,7 @@ function __main__() {
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
   local _short_opt="cu:p:"
-  local _long_opt="help,debug,user:,pages:,tor:"
+  local _long_opt="help,debug,user:,pages:,tor:,show"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -162,6 +162,13 @@ function __main__() {
         export _tor_port="$2"
 
         shift 2 ;;
+
+
+        --show)
+
+          export show_state="1"
+
+          shift ;;
 
       *)
 
@@ -272,11 +279,19 @@ function __main__() {
 
   _sprintf "head" "Wait a moment, I'm working..."
 
-    _init_function "initConn $_username $_max_per_pages $_tor_port"
+  _init_function "initConn $_username $_max_per_pages $_tor_port"
 
-    _init_function "getGitRepoList"
+  _init_function "getGitRepoList"
+
+  if [[ "$show_state" -eq 1 ]] ; then
+
+    less "${_output_tmp}"
+
+  else
 
     _init_function "getGitRepo"
+
+  fi
 
   # ````````````````````````````````````````````````````````````````````````````
 

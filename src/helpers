@@ -572,6 +572,7 @@ function _help_() {
     -u, --user <username>           set github username
     -p, --pages <num_value>         set github stars pages
         --tor <port_number>         set the tor port number
+        --show                      only show available repositories
 
 
   This program comes with ABSOLUTELY NO WARRANTY.

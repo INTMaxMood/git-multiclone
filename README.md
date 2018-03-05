@@ -29,6 +29,7 @@ Provides the following options:
     -u, --user <username>           set github username
     -p, --pages <num_value>         set github stars pages
         --tor <port_number>         set the tor port number
+        --show                      only show available repositories
 ``````
 
 ## Configuration file
