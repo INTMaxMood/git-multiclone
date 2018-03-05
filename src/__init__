@@ -136,12 +136,6 @@ function __main__() {
 
         shift ; _exit_ "0" ;;
 
-      --debug)
-
-        export stdout_mode="debug"
-
-        shift ;;
-
       --select-all)
 
         export select_state="1"
