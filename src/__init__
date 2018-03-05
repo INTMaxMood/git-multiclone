@@ -260,11 +260,11 @@ function __main__() {
   state=$?
   if [[ "$state" -ne 0 ]] ; then
 
-    _sprintf "stop" "wrong username!"
+    _sprintf "stop" "empty username"
 
     _logger "stop" \
       "${_FUNCTION_ID}()" \
-      "wrong username!"
+      "empty username"
 
   fi
 
@@ -273,23 +273,23 @@ function __main__() {
   state=$?
   if [[ "$state" -ne 0 ]] ; then
 
-    _sprintf "stop" "wrong pages!"
+    _sprintf "stop" "empty pages"
 
     _logger "stop" \
       "${_FUNCTION_ID}()" \
-      "wrong pages!"
+      "empty pages"
 
   fi
 
   clear
 
-  _init_function "pagesCounter $_pages"
+  _init_function "genCounter $_pages"
 
   _sprintf "head" "Wait a moment, I'm working..."
 
   _init_function "initConn $_username $_max_per_pages $_tor_port"
 
-  _init_function "getGitRepoList"
+  _init_function "genRepoList"
 
   local _repo_num=$(cat ${_output_tmp} | wc -l)
 
