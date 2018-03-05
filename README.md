@@ -25,7 +25,6 @@ Provides the following options:
 
   Options:
         --help                      show this message
-        --debug                     displays information on the screen (debug mode)
         --select-all                select all available repositories
         --tor <port_number>         set the tor port number
 ``````
