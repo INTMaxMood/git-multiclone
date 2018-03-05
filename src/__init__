@@ -291,23 +291,20 @@ function __main__() {
   fi
 
   # Set the number of pages compatible with account on the github.
-  # _pages=$(dialog --clear --backtitle "gitpunk" \
-  #          --inputbox "Enter the pages:" 8 50 \
-  #          3>&1 1>&2 2>&3)
+  _pages=$(dialog --clear --backtitle "gitpunk" \
+           --inputbox "Enter the pages:" 8 50 \
+           3>&1 1>&2 2>&3)
 
-  # _kstate=$?
-  # if [[ $_kstate -ne 0 ]] ; then
+  _kstate=$?
+  if [[ $_kstate -ne 0 ]] ; then
 
-  #   _sprintf "stop" "empty pages"
+    _sprintf "stop" "empty pages"
 
-  #   _logger "stop" \
-  #     "${_FUNCTION_ID}()" \
-  #     "empty pages"
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "empty pages"
 
-  # fi
-
-  # Constant pages value.
-  _pages=1000
+  fi
 
   # Array that stores the names of variables used that are part of the script
   # call parameters (_GETOPT_PARAMS). Useful when checking whether all
