@@ -11,7 +11,7 @@
 # Example:
 #   - lib/kill_process - file with your function
 #   - _fd_stack=("kill_process") - says to include this file in the script
-readonly _fd_stack=(genCounter initConn genRepoList)
+readonly _fd_stack=(checkUser genPagesNum getRepoList genRepoList)
 
 if [[ "${#_fd_stack[@]}" -ne 0 ]] ; then
 
