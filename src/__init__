@@ -385,6 +385,7 @@ function __main__() {
   _kstate=$?
   if [[ $_kstate -ne 0 ]] ; then _exit_ 0 ; fi
 
+  # Cloning repositories mechanism with progress bar.
   dialog --gauge "Cloning repository" 6 100 0 < <(
 
   n="${#_repo_list[@]}"
