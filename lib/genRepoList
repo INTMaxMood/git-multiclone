@@ -1,25 +1,25 @@
 # shellcheck shell=bash
 
 # ``````````````````````````````````````````````````````````````````````````````
-# Function name: getGitRepoList()
+# Function name: genRepoList()
 #
 # Description:
 #   Prepare repository list.
 #
 # Usage:
-#   getGitRepoList
+#   genRepoList
 #
 # Examples:
-#   getGitRepoList
+#   genRepoList
 #
 
-function getGitRepoList() {
+function genRepoList() {
 
-  local _FUNCTION_ID="getGitRepoList"
+  local _FUNCTION_ID="genRepoList"
   local _STATE="0"
 
   _msg_args+=(\
-  "-> prepare repository list")
+  "-> generate repository list")
 
   _cmd_args+=(\
   "eval cat $_log_stdout | grep clone_url | cut -d ':' -f2- | tr -d '\"' | tr -d ',' > ${_output_tmp}")
