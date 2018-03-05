@@ -23,8 +23,8 @@ function checkUser() {
 
   _sprintf "info" "-> checking '$username' account"
 
-  # shellcheck disable=SC2034,SC2154
-  _user_status=$(curl "$_conn_args" -Iks "https://api.github.com/users/${username}" \
+  # shellcheck disable=SC2034,SC2086,SC2154
+  _user_status=$(curl ${_conn_args} -Iks "https://api.github.com/users/${username}" \
     | grep "Status" \
     | cut -d ":" -f2 \
     | grep "200")
