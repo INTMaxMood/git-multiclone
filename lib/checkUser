@@ -21,7 +21,7 @@ function checkUser() {
 
   local username="$1"
 
-  _sprintf "info" "-> checking $username account"
+  _sprintf "info" "-> checking '$username' account"
 
   _user_status=$(curl ${_conn_args} -Iks https://api.github.com/users/${username} \
     | grep "Status" \
