@@ -10,7 +10,9 @@
 
 ## Description
 
-Download the repositories that you have marked with an star from github.
+Download user repositories from github with simple bash script! This tool also allow get repo that you have marked with an star from github.
+
+
 
 ## Parameters
 
@@ -29,23 +31,15 @@ Provides the following options:
         --tor <port_number>         set the tor port number
 ``````
 
-## Configuration file
-
-The configuration file (appended with the `-c|--config` parameter) has the following structure:
-
-``````
-# shellcheck shell=bash
-
-# Examples:
-#   - ipaddr=("127.0.0.1")
-ipaddr=("127.0.0.1")
-``````
-
 ## Requirements
 
-**<u>gitpunk</u>** uses external utilities to be installed before running:
+**<u>Gitpunk</u>** uses external utilities to be installed before running:
 
-- link-to-external-tool
+- [mktemp](https://www.mktemp.org/manual.html)
+- [dialog](http://linuxcommand.org/lc3_adv_dialog.php)
+- [git](https://git-scm.com/)
+- [curl](https://curl.haxx.se/docs/manpage.html)
+- [tor](https://www.torproject.org/index.html.en)
 
 ## Install/uninstall
 
@@ -66,25 +60,13 @@ For remove:
 
 ## Use example
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
-
 Then an example of starting the tool:
 
 ``````
-gitpunk -c src/configs/template.cfg --time --verbose
+./bin/gitpunk
 ``````
 
-In the first place we define the configuration (which should be prepared in advance):
-
-- `-c src/configs/template.cfg`
-
-Displays the execution time of the selected commands (only with `--verbose` mode):
-
-- `--time`
-
-Verbose mode - displays more detailed information on the screen:
-
-- `--verbose`
+> If you want to use a connection via the tor network, use the `--tor` parameter and set the port number as the value.
 
 ## Logging
 
@@ -93,15 +75,18 @@ After running the script, the `log/` directory is created and in it the followin
 * `<script_name>.<date>.log` - all `_logger()` function calls are saved in it
 * `stdout.log` - a standard output and errors from the `_init_cmd()` function are written in it. If you want to redirect the output from command, use the following structure: `your_command >>"$_log_stdout" 2>&1 &`
 
-## Important
-
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
-
 ## Limitations
 
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed mollis nunc, sed lacinia ligula. Sed ac ante ipsum. Aliquam molestie, eros sed aliquam cursus, ante ipsum volutpat nisl, at pretium diam lacus at quam. Suspendisse commodo magna eu aliquet fringilla.
+The main limit is the maximum number of requests allowed by the github service from one IP address (this limit is canceled after a given time). If you want to check the values:
+
+```bash
+curl -Iks https://api.github.com/ | grep "X-RateLimit.*:" 
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 17
+X-RateLimit-Reset: 1520291624
+```
+
+Of course, one way to circumvent this limitation is to use the connection through the network nodes of the tor.
 
 ## Contributing
 
@@ -127,8 +112,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
         |-- import                 # appends the contents of the lib directory
         |-- __init__               # contains the __main__ function
         |-- settings               # contains gitpunk settings
-    |-- templates                  # contains examples and template files
-        |-- user-config.cfg        # example of user config file
     |-- tmp                        # contains temporary files (mktemp)
 
 ## License
