@@ -1,0 +1,36 @@
+# shellcheck shell=bash
+
+# ``````````````````````````````````````````````````````````````````````````````
+# Function name: getRepoList()
+#
+# Description:
+#   Get repository list.
+#
+# Usage:
+#   getRepoList "username" "pages"
+#
+# Examples:
+#   getRepoList "$username" "$pages"
+#
+
+function getRepoList() {
+
+  local _FUNCTION_ID="getRepoList"
+  local _STATE="0"
+
+  local username="$1"
+  local pages="$2"
+
+  for i in $(seq 1 ${pages}) ; do
+
+    _msg_args+=(\
+    "-> searching repository (${i})")
+
+    _cmd_args+=(\
+    "curl ${_conn_args} -ks https://api.github.com/users/${username}/starred?per_page=100&page=${i}")
+
+  done
+
+  return "$_STATE"
+
+}

@@ -1,0 +1,33 @@
+# shellcheck shell=bash
+
+# ``````````````````````````````````````````````````````````````````````````````
+# Function name: genPagesNumNum()
+#
+# Description:
+#   Generate pages number.
+#
+# Usage:
+#   genPagesNum "pages"
+#
+# Examples:
+#   genPagesNum "$_pages"
+#   genPagesNum 20
+#
+
+function genPagesNum() {
+
+  local _FUNCTION_ID="genPagesNum"
+  local _STATE="0"
+
+  local pages="$1"
+  local _max_pages=0
+
+  _max_per_pages=0
+
+  _max_pages=$((pages * 30))
+
+  _max_per_pages=$((_max_pages / 100 + 1))
+
+  return "$_STATE"
+
+}
