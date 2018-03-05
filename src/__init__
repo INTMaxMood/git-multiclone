@@ -259,7 +259,7 @@ function __main__() {
 
   fi
 
-  # f the --tor parameter was used.
+  # If the --tor parameter was used.
   if [[ "$tor_state" -eq 1 ]] ; then
 
     _conn_args="--proxy socks5h://localhost:${_tor_port}"
@@ -267,6 +267,40 @@ function __main__() {
   else
 
     _conn_args=""
+
+  fi
+
+  # Set username/account.
+  _type=$(dialog --clear --backtitle "gitpunk" --menu "Set repository type:" 9 50 50 1 "User repository" 2 "User starred" 3>&1 1>&2 2>&3)
+
+  _kstate=$?
+  if [[ $_kstate -ne 0 ]] ; then
+
+    _sprintf "stop" "empty repository type"
+
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "empty repository type"
+
+  fi
+
+  local _repo_type=""
+
+  if [[ "$_type" -eq 1 ]] ; then
+
+    _repo_type="repos"
+
+  elif [[ "$_type" -eq 2 ]] ; then
+
+    _repo_type="starred"
+
+  else
+
+    _sprintf "stop" "unknown repository type"
+
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "unknown repository type"
 
   fi
 
@@ -307,7 +341,7 @@ function __main__() {
 
   _init_function "checkUser $_username"
 
-  _init_function "getRepoList $_username $_max_per_pages"
+  _init_function "getRepoList $_username $_max_per_pages $_repo_type"
 
   _init_function "genRepoList"
 
@@ -315,13 +349,14 @@ function __main__() {
 
   _sprintf "info" "-> found $_repo_num repositories"
 
-  if [[ "$select_state" -eq 0 ]] ; then
+  # If the --select-all parameter was used.
+  if [[ "$select_state" -eq 1 ]] ; then
 
-    awk '{print $0" \"\" off"}' "$_tmpA" > "$_tmpB"
+    awk '{print $0" \"\" on"}' "$_tmpA" > "$_tmpB"
 
   else
 
-    awk '{print $0" \"\" on"}' "$_tmpA" > "$_tmpB"
+    awk '{print $0" \"\" off"}' "$_tmpA" > "$_tmpB"
 
   fi
 
@@ -333,12 +368,13 @@ function __main__() {
 
   done < "$_tmpB"
 
+  # Show all repositories.
   _repo_list=($(dialog --checklist "Repositories list ($_repo_num found):" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
   _kstate=$?
   if [[ $_kstate -ne 0 ]] ; then _exit_ 0 ; fi
 
-  dialog --gauge "Clone" 6 100 0 < <(
+  dialog --gauge "Cloning repository" 6 100 0 < <(
 
   n="${#_repo_list[@]}"
   j=0
@@ -354,6 +390,9 @@ Cloning repository: $r
 XXX
 __EOF__
 
+    # - set directory to {ROOT_DIRECTORY}/repositories
+    # - clone repository from github
+    # - set directory to {ROOT_DIRECTORY}
     cd "${_repo_directory}" && git clone "$r" >/dev/null 2>&1 && cd ../
 
   done
