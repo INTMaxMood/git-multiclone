@@ -614,6 +614,14 @@ function _before_init() {
     : >"$i"
   done
 
+  # shellcheck disable=SC2154
+  # Flush tmp/ directory.
+  if [[ -d "${_tmp}" ]] ; then
+
+    rm -fr "${_tmp:?}"/*
+
+  fi
+
   return "$_STATE"
 
 }
