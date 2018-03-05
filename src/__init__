@@ -45,7 +45,8 @@ function __main__() {
   _menu_stack=()
 
   # Temporary output file.
-  readonly _output_tmp="${_tmp}/output"
+  readonly _tmpA=$(mktemp "${_tmp}/output.XXXXXXXX")
+  readonly _tmpB=$(mktemp "${_tmp}/output.XXXXXXXX")
 
   # Local directory for repositories.
   readonly _repo_directory="${_rel}/repository"
@@ -258,6 +259,7 @@ function __main__() {
 
   fi
 
+  # f the --tor parameter was used.
   if [[ "$tor_state" -eq 1 ]] ; then
 
     _conn_args="--proxy socks5h://localhost:${_tor_port}"
@@ -268,6 +270,7 @@ function __main__() {
 
   fi
 
+  # Set username/account.
   _username=$(dialog --clear --inputbox "Enter the username:" 8 50 3>&1 1>&2 2>&3)
 
   _kstate=$?
@@ -281,6 +284,7 @@ function __main__() {
 
   fi
 
+  # Set the number of pages compatible with account on the github.
   _pages=$(dialog --clear --inputbox "Enter the pages:" 8 50 3>&1 1>&2 2>&3)
 
   _kstate=$?
@@ -296,6 +300,7 @@ function __main__() {
 
   clear
 
+  # Init background tasks.
   _sprintf "head" "Background tasks..."
 
   _init_function "genPagesNum $_pages"
@@ -306,33 +311,29 @@ function __main__() {
 
   _init_function "genRepoList"
 
-  local _repo_num=$(cat ${_output_tmp} | wc -l)
+  local _repo_num=$(cat "$_tmpA" | wc -l)
 
   _sprintf "info" "-> found $_repo_num repositories"
 
   if [[ "$select_state" -eq 0 ]] ; then
 
-    awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
+    awk '{print $0" \"\" off"}' "$_tmpA" > "$_tmpB"
 
   else
 
-    awk '{print $0" \"\" on"}' "${_output_tmp}" > "${_output_tmp}.num"
+    awk '{print $0" \"\" on"}' "$_tmpA" > "$_tmpB"
 
   fi
-
-  mv "${_output_tmp}.num" "${_output_tmp}"
-
-  rm -fr "${_output_tmp}.num"
 
   menu_options=()
 
   while read -r number sep text ; do
 
-    menu_options+=( ${number//\"} "${sep//\"}" "${text//\"}" )
+    menu_options+=(${number//\"} "${sep//\"}" "${text//\"}")
 
-  done < "${_output_tmp}"
+  done < "$_tmpB"
 
-  _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
+  _repo_list=($(dialog --checklist "Repositories list ($_repo_num found):" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
   _kstate=$?
   if [[ $_kstate -ne 0 ]] ; then _exit_ 0 ; fi
@@ -353,7 +354,7 @@ Cloning repository: $r
 XXX
 __EOF__
 
-    cd ${_repo_directory} && git clone "$r" >/dev/null 2>&1 && cd ../
+    cd "${_repo_directory}" && git clone "$r" >/dev/null 2>&1 && cd ../
 
   done
 )
