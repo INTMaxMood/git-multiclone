@@ -16,6 +16,7 @@
 
 function genPagesNum() {
 
+  # shellcheck disable=SC2034
   local _FUNCTION_ID="genPagesNum"
   local _STATE="0"
 
@@ -26,6 +27,7 @@ function genPagesNum() {
 
   _max_pages=$((pages * 30))
 
+  # shellcheck disable=SC2034
   _max_per_pages=$((_max_pages / 100 + 1))
 
   return "$_STATE"

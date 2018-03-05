@@ -610,7 +610,7 @@ function _before_init() {
     "${_FUNCTION_ID}()" \
     "directory change error: '$_rel'"
 
-  for i in "$_log_stdout" ; do
+  for i in $_log_stdout ; do
     : >"$i"
   done
 
@@ -643,6 +643,7 @@ function _after_init() {
     "${_FUNCTION_ID}()" \
     "directory change error: '$_rel'"
 
+  # shellcheck disable=SC2154
   for _fd in "${_tmpA}" "${_tmpB}" ; do
     rm -fr "$_fd"
   done

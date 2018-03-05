@@ -41,9 +41,11 @@ function __main__() {
   time_mode="0"
   export _cmdtime_state="0"
 
+  # shellcheck disable=SC2034
   # Stores menu variables.
   _menu_stack=()
 
+  # shellcheck disable=SC2154
   # Temporary output file.
   readonly _tmpA=$(mktemp "${_tmp}/output.XXXXXXXX")
   readonly _tmpB=$(mktemp "${_tmp}/output.XXXXXXXX")
@@ -345,7 +347,8 @@ function __main__() {
 
   _init_function "genRepoList"
 
-  local _repo_num=$(cat "$_tmpA" | wc -l)
+  local _repo_num=""
+  _repo_num=$(wc -l <"$_tmpA")
 
   _sprintf "info" "-> found $_repo_num repositories"
 
@@ -390,10 +393,14 @@ Cloning repository: $r
 XXX
 __EOF__
 
-    # - set directory to {ROOT_DIRECTORY}/repositories
-    # - clone repository from github
-    # - set directory to {ROOT_DIRECTORY}
-    cd "${_repo_directory}" && git clone "$r" >/dev/null 2>&1 && cd ../
+    # Set directory to {ROOT_DIRECTORY}/repositories.
+    cd "${_repo_directory}" || _exit_ 1
+
+    # Clone repository from github.
+    git clone "$r" >/dev/null 2>&1
+    
+    # Set directory to {ROOT_DIRECTORY}.
+    cd ../ || _exit_ 1
 
   done
 )

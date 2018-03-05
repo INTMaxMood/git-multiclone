@@ -15,6 +15,7 @@
 
 function getRepoList() {
 
+  # shellcheck disable=SC2034
   local _FUNCTION_ID="getRepoList"
   local _STATE="0"
 
@@ -22,7 +23,7 @@ function getRepoList() {
   local pages="$2"
   local type="$3"
 
-  for i in $(seq 1 ${pages}) ; do
+  for i in $(seq 1 "$pages") ; do
 
     _msg_args+=(\
     "-> searching repository (${i})")
