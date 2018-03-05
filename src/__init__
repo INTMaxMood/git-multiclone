@@ -41,6 +41,9 @@ function __main__() {
   time_mode="0"
   export _cmdtime_state="0"
 
+  # Stores menu variables.
+  _menu_stack=()
+
   # Temporary output file.
   readonly _output_tmp="${_tmp}/output"
 
@@ -163,12 +166,11 @@ function __main__() {
 
         shift 2 ;;
 
+      --show)
 
-        --show)
+        export show_state="1"
 
-          export show_state="1"
-
-          shift ;;
+        shift ;;
 
       *)
 
@@ -275,6 +277,42 @@ function __main__() {
 
   fi
 
+  _args=$(dialog --title "gitpunk" --clear --inputbox "Enter the username:" 8 78 3>&1 1>&2 2>&3)
+
+  exitstatus=$?
+  if [[ "$exitstatus" -eq 0 ]] ; then
+
+    _menu_stack+=("$_args")
+
+  else
+
+    _sprintf "stop" "wrong username!"
+
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "wrong username!"
+
+  fi
+
+  _args=$(dialog --title "gitpunk" --clear --inputbox "Enter the pages:" 8 78 3>&1 1>&2 2>&3)
+
+  exitstatus=$?
+  if [[ "$exitstatus" -eq 0 ]] ; then
+
+    _menu_stack+=("$_args")
+
+  else
+
+    _sprintf "stop" "wrong pages!"
+
+    _logger "stop" \
+      "${_FUNCTION_ID}()" \
+      "wrong pages!"
+
+  fi
+
+  clear
+
   _init_function "pagesCounter $_pages"
 
   _sprintf "head" "Wait a moment, I'm working..."
@@ -289,7 +327,20 @@ function __main__() {
 
   if [[ "$show_state" -eq 1 ]] ; then
 
-    less "${_output_tmp}"
+    awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
+    mv "${_output_tmp}.num" "${_output_tmp}"
+
+    rm -fr "${_output_tmp}.num"
+
+    echo -en " \"All\" \"\" off\n" >> "${_output_tmp}"
+
+    menu_options=()
+
+    while read -r number sep text; do
+      menu_options+=( ${number//\"} "${sep//\"}" "${text//\"}" )
+    done < "${_output_tmp}"
+
+    whiptail --title "gitpunk" --checklist "Repositories list:" 28 120 20 "${menu_options[@]}"
 
   else
 
