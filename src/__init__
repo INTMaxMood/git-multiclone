@@ -121,8 +121,8 @@ function __main__() {
   if [ "$_getopt_state" != 0 ] ; then
     _exit_ "1"
   # Ends if no parameter is specified.
-  elif [[ "${#__script_params[@]}" -eq 0 ]] ; then
-    _exit_ "0"
+  # elif [[ "${#__script_params[@]}" -eq 0 ]] ; then
+  #   _exit_ "0"
   fi
 
   eval set -- "$_GETOPT_PARAMS"
@@ -255,14 +255,10 @@ function __main__() {
 
   fi
 
-  _args=$(dialog --title "gitpunk" --clear --inputbox "Enter the username:" 8 78 3>&1 1>&2 2>&3)
+  _username=$(dialog --clear --inputbox "Enter the username:" 8 50 3>&1 1>&2 2>&3)
 
   exitstatus=$?
-  if [[ "$exitstatus" -eq 0 ]] ; then
-
-    _menu_stack+=("$_args")
-
-  else
+  if [[ "$exitstatus" -ne 0 ]] ; then
 
     _sprintf "stop" "wrong username!"
 
@@ -272,14 +268,10 @@ function __main__() {
 
   fi
 
-  _args=$(dialog --title "gitpunk" --clear --inputbox "Enter the pages:" 8 78 3>&1 1>&2 2>&3)
+  _pages=$(dialog --clear --inputbox "Enter the pages:" 8 50 3>&1 1>&2 2>&3)
 
   exitstatus=$?
-  if [[ "$exitstatus" -eq 0 ]] ; then
-
-    _menu_stack+=("$_args")
-
-  else
+  if [[ "$exitstatus" -ne 0 ]] ; then
 
     _sprintf "stop" "wrong pages!"
 
@@ -303,28 +295,55 @@ function __main__() {
 
   _sprintf "info" "-> found $_repo_num repositories"
 
-  if [[ "$show_state" -eq 1 ]] ; then
+  awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
+  mv "${_output_tmp}.num" "${_output_tmp}"
 
-    awk '{print $0" \"\" off"}' "${_output_tmp}" > "${_output_tmp}.num"
-    mv "${_output_tmp}.num" "${_output_tmp}"
+  rm -fr "${_output_tmp}.num"
 
-    rm -fr "${_output_tmp}.num"
+  echo -en " \"All\" \"\" off\n" >> "${_output_tmp}"
 
-    echo -en " \"All\" \"\" off\n" >> "${_output_tmp}"
+  menu_options=()
 
-    menu_options=()
+  while read -r number sep text; do
+    menu_options+=( ${number//\"} "${sep//\"}" "${text//\"}" )
+  done < "${_output_tmp}"
 
-    while read -r number sep text; do
-      menu_options+=( ${number//\"} "${sep//\"}" "${text//\"}" )
-    done < "${_output_tmp}"
+  _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
-    whiptail --title "gitpunk" --checklist "Repositories list:" 28 120 20 "${menu_options[@]}"
-
+  if [[ "${_repo_list[0]}" == "All" ]] ; then
+    true
   else
 
-    _sprintf "head" "OK, I'm cloning $_repo_num found repositories, it may take a long time..."
+    dialog --gauge "Clone" 6 100 0 < <(
 
-    _init_function "getGitRepo"
+    n="${#_repo_list[@]}"
+    j=0
+
+    for r in "${_repo_list[@]}" ; do
+
+      PCT=$(( 100*(++j)/n ))
+
+cat <<EOF
+XXX
+$PCT
+Cloning repository: $r
+XXX
+EOF
+
+      cd ${_repo_directory} && git clone "$r" >/dev/null 2>&1 && cd ../
+
+    done
+)
+
+      #for j in $(cat ${_output_tmp}) ; do
+
+      #  cd ${_repo_directory} && git clone "$j" && cd ../
+
+      #done
+
+      # _init_function "getGitRepo"
+
+    # done
 
   fi
 
