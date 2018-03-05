@@ -4,7 +4,7 @@
 # Function name: genRepoList()
 #
 # Description:
-#   Prepare repository list.
+#   Generate repository list.
 #
 # Usage:
 #   genRepoList
@@ -22,7 +22,7 @@ function genRepoList() {
   "-> generate repository list")
 
   _cmd_args+=(\
-  "eval cat $_log_stdout | grep clone_url | cut -d ':' -f2- | tr -d '\"' | tr -d ',' > ${_output_tmp}")
+  "eval cat ${_log_stdout} | grep clone_url | cut -d ':' -f2- | tr -d '\"' | tr -d ',' > ${_output_tmp}")
 
   return "$_STATE"
 
