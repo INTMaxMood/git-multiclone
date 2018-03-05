@@ -4,7 +4,7 @@
 # Function name: initConn()
 #
 # Description:
-#   Initialize connection to github.
+#   Initialize connection.
 #
 # Usage:
 #   initConn
