@@ -106,7 +106,7 @@ function __main__() {
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
   local _short_opt=""
-  local _long_opt="help,debug,tor:"
+  local _long_opt="help,debug,select-all,tor:"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -139,6 +139,12 @@ function __main__() {
       --debug)
 
         export stdout_mode="debug"
+
+        shift ;;
+
+      --select-all)
+
+        export select_state="1"
 
         shift ;;
 
@@ -300,18 +306,20 @@ function __main__() {
 
   rm -fr "${_output_tmp}.num"
 
-  echo -en " \"All\" \"\" off\n" >> "${_output_tmp}"
-
   menu_options=()
 
-  while read -r number sep text; do
+  while read -r number sep text ; do
+
     menu_options+=( ${number//\"} "${sep//\"}" "${text//\"}" )
+
   done < "${_output_tmp}"
 
   _repo_list=($(dialog --checklist "Repositories list:" 28 120 20 "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
   if [[ "${_repo_list[0]}" == "All" ]] ; then
+
     true
+
   else
 
     dialog --gauge "Clone" 6 100 0 < <(
