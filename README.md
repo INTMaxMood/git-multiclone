@@ -12,7 +12,7 @@
 
 It allows you to clone the repositories (normal repository or marked as a star) of the given user from github.
 
-[![asciicast](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH.png)](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH)
+[![asciicast](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV.png)](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV)
 
 ## Parameters
 
@@ -67,6 +67,18 @@ Then an example of starting the tool:
 ``````
 
 > If you want to use a connection via the tor network, use the `--tor` parameter and set the port number as the value.
+
+### User repositories
+
+**Gitpunk** allows you to download selected or all repositories of any user registered on the github site. User repositories can be viewed from the browser level by selecting:
+
+![gitpunk_output](doc/img/gitpunk_output_01.png)
+
+### User starred repositories
+
+In addition, this tool allows you to download any repository marked with an asterisk. From the user's account level, you can view such repositories by going to:
+
+![gitpunk_output](doc/img/gitpunk_output_02.png)
 
 ## Logging
 
