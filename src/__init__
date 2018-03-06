@@ -243,17 +243,6 @@ function __main__() {
           --menu "Set repository type:" 9 50 50 \
           1 "User repository" 2 "User starred" 3>&1 1>&2 2>&3)
 
-  _kstate=$?
-  if [[ $_kstate -ne 0 ]] ; then
-
-    _sprintf "stop" "empty repository type"
-
-    _logger "stop" \
-      "${_FUNCTION_ID}()" \
-      "empty repository type"
-
-  fi
-
   local _repo_type=""
 
   if [[ "$_type" -eq 1 ]] ; then
@@ -266,11 +255,7 @@ function __main__() {
 
   else
 
-    _sprintf "stop" "unknown repository type"
-
-    _logger "stop" \
-      "${_FUNCTION_ID}()" \
-      "unknown repository type"
+    _exit_ 1
 
   fi
 
@@ -282,11 +267,7 @@ function __main__() {
   _kstate=$?
   if [[ $_kstate -ne 0 ]] ; then
 
-    _sprintf "stop" "empty username"
-
-    _logger "stop" \
-      "${_FUNCTION_ID}()" \
-      "empty username"
+    _exit_ 1
 
   fi
 
@@ -298,11 +279,7 @@ function __main__() {
   _kstate=$?
   if [[ $_kstate -ne 0 ]] ; then
 
-    _sprintf "stop" "empty pages"
-
-    _logger "stop" \
-      "${_FUNCTION_ID}()" \
-      "empty pages"
+    _exit_ 1
 
   fi
 
