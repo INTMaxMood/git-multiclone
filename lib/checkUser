@@ -16,6 +16,7 @@
 
 function checkUser() {
 
+  # shellcheck disable=SC2034
   local _FUNCTION_ID="checkUser"
   local _STATE="0"
 
