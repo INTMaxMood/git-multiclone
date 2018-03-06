@@ -10,7 +10,7 @@
 
 ## Description
 
-It allows you to clone the repositories (normal repository or marked as a star) of the given user from github.
+**Gitpunk** allows you to clone the repositories (normal repository or marked as a star) of the given user from github.
 
 [![asciicast](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV.png)](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV)
 
