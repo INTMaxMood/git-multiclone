@@ -21,24 +21,14 @@ function checkUser() {
 
   local username="$1"
 
-  _sprintf "info" "-> checking '$username' account"
+  _msg_args+=(\
+  "-> checking '$username' account")
 
-  # shellcheck disable=SC2034,SC2086,SC2154
-  _user_status=$(curl ${_conn_args} -Iks "https://api.github.com/users/${username}" \
-    | grep "Status" \
-    | cut -d ":" -f2 \
-    | grep "200")
-  _kstate=$?
-
-  if [[ $_kstate -ne 0 ]] ; then
-
-    _sprintf "stop" "not found ${username} account"
-
-    _logger "stop" \
-      "${_FUNCTION_ID}()" \
-      "not found ${username} account"
-
-  fi
+  _cmd_args+=(\
+  "eval curl ${_conn_args} -Iks https://api.github.com/users/${username} \
+    | grep Status \
+    | cut -d ':' -f2 \
+    | grep 200 | wc -l")
 
   return "$_STATE"
 
