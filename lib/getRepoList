@@ -26,7 +26,7 @@ function getRepoList() {
   for i in $(seq 1 "$pages") ; do
 
     _msg_args+=(\
-    "-> searching repository (${i})")
+    "-> searching repositories (${i})")
 
     _cmd_args+=(\
     "curl ${_conn_args} -ks https://api.github.com/users/${username}/${type}?per_page=100&page=${i}")
