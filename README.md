@@ -10,7 +10,7 @@
 
 ## Description
 
-Download user repositories from github with simple bash script! This tool also allow get repo that you have marked with an star from github.
+It allows you to clone the repositories (normal repository or marked as a star) of the given user from github.
 
 [![asciicast](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH.png)](https://asciinema.org/a/tgq2eKpfaNxJLVI2BKkm5eeHH)
 
