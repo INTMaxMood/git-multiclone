@@ -622,6 +622,9 @@ function _before_init() {
 
   fi
 
+  # shellcheck disable=SC2154
+  mkdir -p "$_repo_directory" || _exit_ 1
+
   return "$_STATE"
 
 }
