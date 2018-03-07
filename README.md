@@ -70,13 +70,13 @@ Then an example of starting the tool:
 
 ### User repositories
 
-**Gitpunk** allows you to download selected or all repositories of any user registered on the github site. User repositories can be viewed from the browser level by selecting:
+**Gitpunk** allows you to download **selected** or **all** repositories of any user registered on the github. User repositories can be viewed from the browser level by selecting:
 
 ![gitpunk_output](doc/img/gitpunk_output_01.png)
 
 ### User starred repositories
 
-In addition, this tool allows you to download any repository marked with an asterisk. From the user's account level, you can view such repositories by going to:
+In addition, this tool allows you to download any repository marked with an **start**. From the user's account level, you can view such repositories by going to:
 
 ![gitpunk_output](doc/img/gitpunk_output_02.png)
 
