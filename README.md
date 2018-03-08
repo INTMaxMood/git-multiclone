@@ -81,6 +81,14 @@ In addition, this tool allows you to download any repository marked with an **st
 
 ![git-multiclone_output](doc/img/git-multiclone_output_02.png)
 
+### Pages
+
+The standard page size in github is **30**. We can extend this value to a maximum of **100** - this value is also used by git-multiclone when checking available repositories (also to limit calls to api). In addition to the username settings, you will be asked to enter the number of pages - you can check this value in the following way:
+
+![git-multiclone_output](doc/img/git-multiclone_output_03.png)
+
+If you are asked for the number of pages it will be best to set their maximum number - in this case **28**.
+
 ## Logging
 
 After running the script, the `log/` directory is created and in it the following files with logs:
