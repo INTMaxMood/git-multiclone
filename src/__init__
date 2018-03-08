@@ -112,7 +112,7 @@ function __main__() {
   # Specifies the call parameters of the script, the exact description
   # can be found in _help_ and file README.md.
   local _short_opt=""
-  local _long_opt="help,debug,select-all,tor:"
+  local _long_opt="help,debug,sort,select-all,tor:"
 
   _GETOPT_PARAMS=$(getopt -o "${_short_opt}" --long "${_long_opt}" \
                    -n "${_init_name}" -- "${__script_params[@]}")
@@ -141,6 +141,12 @@ function __main__() {
         _help_
 
         shift ; _exit_ "0" ;;
+
+      --sort)
+
+        export sort_state="1"
+
+        shift ;;
 
       --select-all)
 
@@ -335,14 +341,31 @@ function __main__() {
 
   _sprintf "info" "-> found $_repo_num repositories"
 
-  # If the --select-all parameter was used.
-  if [[ "$select_state" -eq 1 ]] ; then
+  if [[ "$sort_state" -eq 1 ]] ; then
 
-    awk '{print $0" \"\" on"}' "$_tmpA" > "$_tmpB"
+    # If the --select-all parameter was used.
+    if [[ "$select_state" -eq 1 ]] ; then
+
+      awk '{print $0" \"\" on"}' "$_tmpA" | sort > "$_tmpB"
+
+    else
+
+      awk '{print $0" \"\" off"}' "$_tmpA" | sort > "$_tmpB"
+
+    fi
 
   else
 
-    awk '{print $0" \"\" off"}' "$_tmpA" > "$_tmpB"
+    # If the --select-all parameter was used.
+    if [[ "$select_state" -eq 1 ]] ; then
+
+      awk '{print $0" \"\" on"}' "$_tmpA" > "$_tmpB"
+
+    else
+
+      awk '{print $0" \"\" off"}' "$_tmpA" > "$_tmpB"
+
+    fi
 
   fi
 

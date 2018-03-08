@@ -27,6 +27,7 @@ Provides the following options:
 
   Options:
         --help                      show this message
+        --sort                      sort repositories list
         --select-all                select all available repositories
         --tor <port_number>         set the tor port number
 ``````
