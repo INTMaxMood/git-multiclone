@@ -4,7 +4,7 @@
 #
 # Header:
 #
-#         fname : "gitpunk"
+#         fname : "git-multiclone"
 #         cdate : "26.02.2018"
 #        author : "Michał Żurawski <contact@nslab.at>"
 #      tab_size : "2"
@@ -16,7 +16,7 @@
 #
 # License:
 #
-#   gitpunk, Copyright (C) 2018  Michał Żurawski
+#   git-multiclone, Copyright (C) 2018  Michał Żurawski
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by

@@ -1,18 +1,18 @@
-# gitpunk
+# git-multiclone
 
 ## Releases
 
 |            **STABLE RELEASE**            |           **TESTING RELEASE**            |
 | :--------------------------------------: | :--------------------------------------: |
 | [![](https://img.shields.io/badge/Branch-master-green.svg)]() | [![](https://img.shields.io/badge/Branch-testing-orange.svg)]() |
-| [![](https://img.shields.io/badge/Version-v1.0.0-lightgrey.svg)]() | [![](https://img.shields.io/badge/Version-v1.0.0-lightgrey.svg)]() |
-| [![Build Status](https://travis-ci.org/trimstray/gitpunk.svg?branch=master)](https://travis-ci.org/trimstray/gitpunk) | [![Build Status](https://travis-ci.org/trimstray/gitpunk.svg?branch=testing)](https://travis-ci.org/trimstray/gitpunk) |
+| [![](https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg)]() | [![](https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg)]() |
+| [![Build Status](https://travis-ci.org/trimstray/git-multiclone.svg?branch=master)](https://travis-ci.org/trimstray/git-multiclone) | [![Build Status](https://travis-ci.org/trimstray/git-multiclone.svg?branch=testing)](https://travis-ci.org/trimstray/git-multiclone) |
 
 ## Description
 
-**Gitpunk** clone selected or all user repositories from github (from 'Repositories' page) and also lets you download repositories marked with a star (from 'Stars' page).
+**git-multiclone** clone multiple repositories at once! This tool provides download selected or all user/stars repositories from Github (from 'Repositories' and 'Stars' pages).
 
-[![asciicast](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV.png)](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV)
+[![git-multiclone](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV.png)](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV)
 
 ## Parameters
 
@@ -20,10 +20,10 @@ Provides the following options:
 
 ``````
   Usage:
-    gitpunk <option|long-option>
+    git-multiclone <option|long-option>
 
   Examples:
-    gitpunk --help
+    git-multiclone --help
 
   Options:
         --help                      show this message
@@ -33,7 +33,7 @@ Provides the following options:
 
 ## Requirements
 
-**<u>Gitpunk</u>** uses external utilities to be installed before running:
+**<u>git-multiclone</u>** uses external utilities to be installed before running:
 
 - [mktemp](https://www.mktemp.org/manual.html)
 - [dialog](http://linuxcommand.org/lc3_adv_dialog.php)
@@ -55,7 +55,7 @@ For remove:
 ./setup.sh uninstall
 ``````
 
-> * symlink to `bin/gitpunk` is placed in `/usr/local/bin`
+> * symlink to `bin/git-multiclone` is placed in `/usr/local/bin`
 > * man page is placed in `/usr/local/man/man8`
 
 ## Use example
@@ -63,22 +63,22 @@ For remove:
 Then an example of starting the tool:
 
 ``````
-./bin/gitpunk
+./bin/git-multiclone
 ``````
 
 > If you want to use a connection via the tor network, use the `--tor` parameter and set the port number as the value.
 
 ### User repositories
 
-**Gitpunk** allows you to download **selected** or **all** repositories of any user registered on the github. User repositories can be viewed from the browser level by selecting:
+**git-multiclone** allows you to download **selected** or **all** repositories of any user registered on the github. User repositories can be viewed from the browser level by selecting:
 
-![gitpunk_output](doc/img/gitpunk_output_01.png)
+![git-multiclone_output](doc/img/git-multiclone_output_01.png)
 
 ### User starred repositories
 
 In addition, this tool allows you to download any repository marked with an **start**. From the user's account level, you can view such repositories by going to:
 
-![gitpunk_output](doc/img/gitpunk_output_02.png)
+![git-multiclone_output](doc/img/git-multiclone_output_02.png)
 
 ## Logging
 
@@ -111,19 +111,19 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
     |-- CONTRIBUTING.md            # principles of project support
     |-- .gitignore                 # ignore untracked files
     |-- .travis.yml                # continuous integration with Travis CI
-    |-- setup.sh                   # install gitpunk on the system
+    |-- setup.sh                   # install git-multiclone on the system
     |-- bin
-        |-- gitpunk                # main script (init)
+        |-- git-multiclone         # main script (init)
     |-- doc                        # includes documentation, images and manuals
         |-- man8
-            |-- gitpunk.8          # man page for gitpunk
+            |-- git-multiclone.8   # man page for git-multiclone
     |-- lib                        # libraries, external functions
     |-- log                        # contains logs, created after init
     |-- src                        # includes external project files
         |-- helpers                # contains core functions
         |-- import                 # appends the contents of the lib directory
         |-- __init__               # contains the __main__ function
-        |-- settings               # contains gitpunk settings
+        |-- settings               # contains git-multiclone settings
     |-- tmp                        # contains temporary files (mktemp)
 
 ## License

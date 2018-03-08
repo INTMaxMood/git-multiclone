@@ -239,7 +239,7 @@ function __main__() {
   fi
 
   # Set repository type.
-  _type=$(dialog --clear --backtitle "gitpunk" \
+  _type=$(dialog --clear --backtitle "git-multiclone" \
           --menu "Set repository type:" 9 50 50 \
           1 "User repository" 2 "User starred" 3>&1 1>&2 2>&3)
 
@@ -260,7 +260,7 @@ function __main__() {
   fi
 
   # Set username/account.
-  _username=$(dialog --clear --backtitle "gitpunk" \
+  _username=$(dialog --clear --backtitle "git-multiclone" \
               --inputbox "Enter the username:" 8 50 \
               3>&1 1>&2 2>&3)
 
@@ -272,7 +272,7 @@ function __main__() {
   fi
 
   # Set the number of pages compatible with account on the github.
-  _pages=$(dialog --clear --backtitle "gitpunk" \
+  _pages=$(dialog --clear --backtitle "git-multiclone" \
            --inputbox "Enter the pages:" 8 50 \
            3>&1 1>&2 2>&3)
 
@@ -355,7 +355,7 @@ function __main__() {
   done < "$_tmpB"
 
   # Show all repositories.
-  _repo_list=($(dialog --clear --backtitle "gitpunk" \
+  _repo_list=($(dialog --clear --backtitle "git-multiclone" \
               --checklist "Repositories list ($_repo_num found):" 28 120 20 \
               "${menu_options[@]}" 3>&1 1>&2 2>&3))
 
@@ -391,7 +391,7 @@ __EOF__
   done
 )
 
-  dialog --clear --backtitle "gitpunk" \
+  dialog --clear --backtitle "git-multiclone" \
   --msgbox "Done! Your repositories are in repositories/ directory." 5 65
 
   # ````````````````````````````````````````````````````````````````````````````
