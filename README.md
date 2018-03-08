@@ -10,7 +10,7 @@
 
 ## Description
 
-**git-multiclone** clone multiple repositories at once! This tool provides download selected or all user/stars repositories from Github (from 'Repositories' and 'Stars' pages).
+**Git-multiclone** download multiple repositories at once! This tool provides clone selected or all user/stars repositories from Github (from 'Repositories' and 'Stars' pages).
 
 [![git-multiclone](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV.png)](https://asciinema.org/a/RdBXBXmMCdIW0Wx8LOZiDrSfV)
 
