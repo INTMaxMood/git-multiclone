@@ -1,12 +1,44 @@
-# git-multiclone
+<h1 align="center">Git-Multiclone</h1>
 
-## Releases
+<h4 align="center">Download multiple repositories at once!</h4>
 
-|            **STABLE RELEASE**            |           **TESTING RELEASE**            |
-| :--------------------------------------: | :--------------------------------------: |
-| [![](https://img.shields.io/badge/Branch-master-green.svg)]() | [![](https://img.shields.io/badge/Branch-testing-orange.svg)]() |
-| [![](https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg)]() | [![](https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg)]() |
-| [![Build Status](https://travis-ci.org/trimstray/git-multiclone.svg?branch=master)](https://travis-ci.org/trimstray/git-multiclone) | [![Build Status](https://travis-ci.org/trimstray/git-multiclone.svg?branch=testing)](https://travis-ci.org/trimstray/git-multiclone) |
+<p align="center">
+  <a href="https://img.shields.io/badge/Branch-master-green.svg">
+    <img src="https://img.shields.io/badge/Branch-master-green.svg"
+        alt="Branch">
+  </a>
+  <a href="https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg">
+    <img src="https://img.shields.io/badge/Version-v1.0.1-lightgrey.svg"
+        alt="Version">
+  </a>
+  <a href="https://travis-ci.org/trimstray/git-multiclone">
+    <img src="https://travis-ci.org/trimstray/git-multiclone.svg?branch=master"
+        alt="Travis-CI">
+  <a href="http://www.gnu.org/licenses/">
+    <img src="https://img.shields.io/badge/license-GNU-blue.svg"
+        alt="License">
+  </a>
+</p>
+
+<p align="center">
+   <a href="#description">Description</a>
+ • <a href="#parameters">Parameters</a>
+ • <a href="#requirements">Requirements</a>
+ • <a href="#how-to-use">How To Use</a>
+ • <a href="#loggind">Logging</a>
+ • <a href="#limitations">Limitations</a>
+ • <a href="#contributing">Contributing</a>
+ • <a href="#project-architecture">Project Architecture</a>
+ • <a href="#license">License</a>
+</p>
+
+<div align="center">
+  <sub>Created by
+  <a href="https://twitter.com/trimstray">trimstray</a> and
+  <a href="https://github.com/trimstray/git-multiclone/graphs/contributors">
+    contributors
+  </a>
+</div>
 
 ## Description
 
@@ -42,7 +74,7 @@ Provides the following options:
 - [curl](https://curl.haxx.se/docs/manpage.html)
 - [tor](https://www.torproject.org/index.html.en)
 
-## Install/uninstall
+## How To Use
 
 It's simple - for install:
 
@@ -58,8 +90,6 @@ For remove:
 
 > * symlink to `bin/git-multiclone` is placed in `/usr/local/bin`
 > * man page is placed in `/usr/local/man/man8`
-
-## Use example
 
 Then an example of starting the tool:
 
@@ -101,7 +131,7 @@ After running the script, the `log/` directory is created and in it the followin
 The main limit is the maximum number of requests allowed by the github service from one IP address (this limit is canceled after a given time). If you want to check the values:
 
 ```bash
-curl -Iks https://api.github.com/ | grep "X-RateLimit.*:" 
+curl -Iks https://api.github.com/ | grep "X-RateLimit.*:"
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 17
 X-RateLimit-Reset: 1520291624
